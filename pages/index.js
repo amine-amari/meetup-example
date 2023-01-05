@@ -17,8 +17,32 @@ const dummy_meetups = [
     }
 ];
 
-function HomePage() {
-    return <MeetupList meetups={dummy_meetups} /> 
+function HomePage(props) {
+
+    return <MeetupList meetups={props.meetups} /> 
+}
+
+// Server Site rendering
+//export async function getServerSideProps(context) {
+//    const req = context.req;
+//    const res = context.res;
+//    // fetch data from an API
+//    return {
+//        props:{
+//            meetups: dummy_meetups
+//        }
+//    };
+//}
+
+// Static Site Generation
+export async function getStaticProps() {
+    // fetch data from API
+    return {
+        props: {
+            meetups: dummy_meetups
+        },
+        revalidate: 1
+    };
 }
 
 export default HomePage;
